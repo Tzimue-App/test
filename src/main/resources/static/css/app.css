@@ -1,0 +1,57 @@
+/* ============================================================
+   app.css — Custom overrides on top of Bootstrap 5
+   ============================================================ */
+
+:root {
+    --bs-primary:     #4f46e5;
+    --bs-primary-rgb: 79, 70, 229;
+    --card-radius:    .75rem;
+}
+
+/* Smooth transitions globally */
+a, button, .btn, .card { transition: all .2s ease-in-out; }
+
+/* Card hover lift */
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 .75rem 1.5rem rgba(0,0,0,.12) !important;
+}
+
+.category-card {
+    border-top: 3px solid var(--bs-primary) !important;
+}
+
+/* Navbar active link underline */
+.navbar-nav .nav-link.active {
+    border-bottom: 2px solid var(--bs-primary);
+}
+
+/* Rounded cards */
+.card {
+    border-radius: var(--card-radius);
+}
+
+/* Hero gradient */
+.hero-gradient {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+}
+
+/* Table head */
+.table-dark th { letter-spacing: .05em; font-size: .8rem; text-transform: uppercase; }
+
+/* Form focus ring color */
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 .2rem rgba(79, 70, 229, .25);
+}
+
+/* Badge pill */
+.badge { border-radius: 2rem; padding: .35em .75em; }
+
+/* Pagination */
+.page-link { color: var(--bs-primary); }
+.page-item.active .page-link {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+}

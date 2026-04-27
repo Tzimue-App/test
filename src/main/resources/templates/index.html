@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}">
+<head><title>Home</title></head>
+<body>
+<main layout:fragment="content">
+
+    <!-- Hero -->
+    <div class="p-5 mb-4 bg-dark text-white rounded-3 shadow">
+        <div class="container-fluid py-3">
+            <h1 class="display-5 fw-bold">
+                <i class="bi bi-layers-fill me-2 text-primary"></i>Spring Boot Template
+            </h1>
+            <p class="col-md-8 fs-5 text-secondary">
+                A production-ready Spring Boot + Thymeleaf starter with
+                Bootstrap 5, Spring Security, OAuth2 Google, and PostgreSQL.
+            </p>
+            <a th:href="@{/categories}" class="btn btn-primary btn-lg me-2">
+                <i class="bi bi-grid me-1"></i> Browse Categories
+            </a>
+            <a th:href="@{/items}" class="btn btn-outline-light btn-lg">
+                <i class="bi bi-box me-1"></i> All Items
+            </a>
+        </div>
+    </div>
+
+    <!-- Recent Items -->
+    <h2 class="h4 mb-3 fw-semibold">
+        <i class="bi bi-clock-history me-2 text-primary"></i>Recent Items
+    </h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+        <div class="col" th:each="item : ${recentItems}">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <span class="badge bg-secondary mb-2" th:text="${item.categoryName}">Category</span>
+                    <h5 class="card-title" th:text="${item.name}">Item name</h5>
+                    <p class="card-text text-muted small" th:text="${item.description}">Description</p>
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <span class="fw-bold text-primary"
+                          th:text="${item.price != null ? '€' + #numbers.formatDecimal(item.price,1,2) : 'N/A'}">
+                        €0.00
+                    </span>
+                    <a th:href="@{/items/{id}/edit(id=${item.id})}" class="btn btn-sm btn-outline-primary">
+                        <i class="bi bi-pencil"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div th:if="${recentItems.isEmpty()}" class="col-12">
+            <p class="text-muted">No items yet. <a th:href="@{/items/new}">Create the first one.</a></p>
+        </div>
+    </div>
+
+    <!-- Categories summary -->
+    <h2 class="h4 mb-3 fw-semibold">
+        <i class="bi bi-grid me-2 text-primary"></i>Categories
+    </h2>
+    <div class="row row-cols-2 row-cols-md-4 g-3">
+        <div class="col" th:each="cat : ${categories}">
+            <a th:href="@{/items(categoryId=${cat.id})}" class="text-decoration-none">
+                <div class="card text-center border-0 shadow-sm h-100 category-card">
+                    <div class="card-body">
+                        <i class="bi bi-folder2-open fs-2 text-primary mb-2"></i>
+                        <h6 class="card-title mb-1" th:text="${cat.name}">Category</h6>
+                        <small class="text-muted"
+                               th:text="${cat.itemCount + ' item(s)'}">0 items</small>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+</main>
+</body>
+</html>
