@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased]
+## [v0.0.1-a-SNAPSHOT]
 
-## [Unreleased]
+## [v0.0.1-a-SNAPSHOT]
 <!-- 
 BUMP_TYPE : 
 1 = Major (X.0.0)
@@ -10,7 +10,7 @@ BUMP_TYPE :
 3 = Patch (0.0.X)
 4 = Stage change (0.0.0-x)
 -->
-Bump: [3]
+Bump: [Numéro]
 
 Initial setup
 
