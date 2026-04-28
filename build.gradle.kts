@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "com.template"
-version = "0.0.1-SNAPSHOT"
+version = "v0.0.0-a-SNAPSHOT"
 
 java {
     toolchain {

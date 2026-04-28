@@ -13,6 +13,7 @@ function Show-Help {
     Write-Host "  docker-up   - Build and start full Docker stack (prod)"
     Write-Host "  docker-down - Stop and remove Docker stack"
     Write-Host "  bump        - Run versioning script"
+    Write-Host "  bump-auto   - Run versioning script and commit (if success)"
     Write-Host "  clean       - Clean build artifacts"
 }
 
@@ -27,7 +28,7 @@ switch ($command) {
         .\gradlew.bat bootRun --args='--spring.profiles.active=dev'
     }
     "test" {
-        $env:DOCKER_HOST="npipe:////./pipe/dockerDesktopLinuxEngine"
+        $env:DOCKER_HOST = "npipe:////./pipe/dockerDesktopLinuxEngine"
         .\gradlew.bat test jacocoTestReport
     }
     "build" {
@@ -42,6 +43,18 @@ switch ($command) {
     "bump" {
         python bump_version.py
     }
+    "bump-auto" {
+        python bump_version.py
+        
+        if ($LASTEXITCODE -ne 0) {
+            Write-Host "BUMP VERSION FAILED. Rollback..." -ForegroundColor Red
+            git reset --hard HEAD~1
+            return
+        }
+        
+        Write-Host "BUMP VERSION SUCCESSFULL !" -ForegroundColor Green
+    }
+
     "clean" {
         .\gradlew.bat clean
     }

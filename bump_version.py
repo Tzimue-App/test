@@ -19,7 +19,7 @@ def get_bump_info():
     try:
         with open(CHANGELOG_FILE, "r", encoding="utf-8") as f:
             content = f.read()
-            match = re.search(r"Bump:\s*(\d)", content)
+            match = re.search(r"Bump:\s*\[?(\d)\]?", content)
             return int(match.group(1)) if match else None
     except FileNotFoundError:
         print(f"{CHANGELOG_FILE} not found.")
@@ -76,9 +76,10 @@ def update_files(new_version):
     with open(CHANGELOG_FILE, "r", encoding="utf-8") as f: 
         content = f.read()
     new_content = content.replace("## [Unreleased]", f"## [{new_version}]")
-    new_content = re.sub(r"Bump:\s*\d", "Bump: [Numéro]", new_content)
+    new_content = re.sub(r"Bump:\s*\[?\d\]?", "Bump: [Numéro]", new_content)
     with open(CHANGELOG_FILE, "w", encoding="utf-8") as f: 
         f.write(new_content)
+
 
 def main(): 
     print("Starting Bump Version Script...")
