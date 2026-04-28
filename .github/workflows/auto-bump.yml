@@ -10,7 +10,7 @@ jobs:
   bump-and-release:
     runs-on: ubuntu-latest
     # Optional: Only run if the commit message indicates a merge from a feature branch
-    # if: "startsWith(github.event.head_commit.message, 'Merge pull request') || startsWith(github.event.head_commit.message, 'Merge branch')"
+    if: "startsWith(github.event.head_commit.message, 'Merge pull request') || startsWith(github.event.head_commit.message, 'Merge branch')"
     
     permissions:
       contents: write # Required to push commits, tags, and create releases
